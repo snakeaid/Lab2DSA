@@ -1,4 +1,4 @@
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 class StatisticsUtils {
     public static void displayStatistics(ProductManagementSystem system) {

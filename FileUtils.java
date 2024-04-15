@@ -1,6 +1,5 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import javax.swing.JOptionPane;
+import java.io.*;
+import javax.swing.*;
 
 class FileUtils {
     public static void saveDataToFile(ProductManagementSystem system) {

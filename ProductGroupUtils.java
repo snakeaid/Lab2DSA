@@ -1,4 +1,4 @@
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 class ProductGroupUtils {
     public static void showProductGroupOptions(ProductManagementSystem system) {
