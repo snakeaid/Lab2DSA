@@ -20,7 +20,7 @@ public class Main {
         system.addProductGroup(foodGroup);
         system.addProductGroup(nonFoodGroup);
 
-        JFrame frame = new JFrame("Models.Product Management System");
+        JFrame frame = new JFrame("Product Management System");
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
         ProductManagementGUI gui = new ProductManagementGUI(system, frame);

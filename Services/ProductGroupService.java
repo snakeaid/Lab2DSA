@@ -7,7 +7,7 @@ import javax.swing.*;
 public class ProductGroupService {
     public static void showProductGroupOptions(ProductManagementSystem system) {
         String[] options = {"Add Group", "Edit Group", "Remove Group"};
-        int choice = JOptionPane.showOptionDialog(null, "Select an option:", "Models.Product Group Options",
+        int choice = JOptionPane.showOptionDialog(null, "Select an option:", "Product Group Options",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
         switch (choice) {
@@ -30,7 +30,7 @@ public class ProductGroupService {
         ProductGroup newGroup = new ProductGroup(groupName, groupDescription);
         system.addProductGroup(newGroup);
 
-        JOptionPane.showMessageDialog(null, "Models.Product group added successfully.");
+        JOptionPane.showMessageDialog(null, "Product group added successfully.");
     }
 
     private static void editProductGroup(ProductManagementSystem system) {
@@ -44,9 +44,9 @@ public class ProductGroupService {
             productGroup.setGroupName(newGroupName);
             productGroup.setGroupDescription(newGroupDescription);
 
-            JOptionPane.showMessageDialog(null, "Models.Product group information updated successfully.");
+            JOptionPane.showMessageDialog(null, "Product group information updated successfully.");
         } else {
-            JOptionPane.showMessageDialog(null, "Models.Product group not found.");
+            JOptionPane.showMessageDialog(null, "Product group not found.");
         }
     }
 
@@ -56,9 +56,9 @@ public class ProductGroupService {
 
         if (productGroup != null) {
             system.removeProductGroup(productGroup);
-            JOptionPane.showMessageDialog(null, "Models.Product group removed successfully.");
+            JOptionPane.showMessageDialog(null, "Product group removed successfully.");
         } else {
-            JOptionPane.showMessageDialog(null, "Models.Product group not found.");
+            JOptionPane.showMessageDialog(null, "Product group not found.");
         }
     }
 

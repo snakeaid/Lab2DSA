@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class ProductService {
     public static void showProductOptions(ProductManagementSystem system) {
-        String[] options = {"Add Models.Product", "Edit Models.Product", "Remove Models.Product"};
-        int choice = JOptionPane.showOptionDialog(null, "Select an option:", "Models.Product Options",
+        String[] options = {"Add Product", "Edit Product", "Remove Product"};
+        int choice = JOptionPane.showOptionDialog(null, "Select an option:", "Product Options",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
         switch (choice) {
@@ -53,9 +53,9 @@ public class ProductService {
             }
 
             productGroup.addNewProduct(productName, description, manufacturer, quantity, price);
-            JOptionPane.showMessageDialog(null, "Models.Product added successfully.");
+            JOptionPane.showMessageDialog(null, "Product added successfully.");
         } else {
-            JOptionPane.showMessageDialog(null, "Models.Product group not found.");
+            JOptionPane.showMessageDialog(null, "Product group not found.");
         }
     }
 
@@ -75,12 +75,12 @@ public class ProductService {
                 double newPrice = Double.parseDouble(JOptionPane.showInputDialog("Enter the new price:", product.getPrice()));
 
                 productGroup.editProductInformation(product, newProductName, newDescription, newManufacturer, newQuantity, newPrice);
-                JOptionPane.showMessageDialog(null, "Models.Product information updated successfully.");
+                JOptionPane.showMessageDialog(null, "Product information updated successfully.");
             } else {
-                JOptionPane.showMessageDialog(null, "Models.Product not found.");
+                JOptionPane.showMessageDialog(null, "Product not found.");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Models.Product group not found.");
+            JOptionPane.showMessageDialog(null, "Product group not found.");
         }
     }
 
@@ -94,12 +94,12 @@ public class ProductService {
 
             if (product != null) {
                 productGroup.removeProduct(product);
-                JOptionPane.showMessageDialog(null, "Models.Product removed successfully.");
+                JOptionPane.showMessageDialog(null, "Product removed successfully.");
             } else {
-                JOptionPane.showMessageDialog(null, "Models.Product not found.");
+                JOptionPane.showMessageDialog(null, "Product not found.");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Models.Product group not found.");
+            JOptionPane.showMessageDialog(null, "Product group not found.");
         }
     }
 
@@ -111,13 +111,13 @@ public class ProductService {
             Product product = findProduct(group, productName);
             if (product != null) {
                 found = true;
-                JOptionPane.showMessageDialog(null, "Models.Product found in group: " + group.getGroupName());
+                JOptionPane.showMessageDialog(null, "Product found in group: " + group.getGroupName());
                 break;
             }
         }
 
         if (!found) {
-            JOptionPane.showMessageDialog(null, "Models.Product not found in any group.");
+            JOptionPane.showMessageDialog(null, "Product not found in any group.");
         }
     }
 

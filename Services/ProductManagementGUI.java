@@ -38,7 +38,7 @@ public class ProductManagementGUI {
         });
         frame.add(saveButton);
 
-        JButton productButton = new JButton("Models.Product");
+        JButton productButton = new JButton("Product");
         productButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,7 +47,7 @@ public class ProductManagementGUI {
         });
         frame.add(productButton);
 
-        JButton productGroupButton = new JButton("Models.Product Group");
+        JButton productGroupButton = new JButton("Product Group");
         productGroupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,7 +56,7 @@ public class ProductManagementGUI {
         });
         frame.add(productGroupButton);
 
-        JButton searchButton = new JButton("Search Models.Product");
+        JButton searchButton = new JButton("Search Product");
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -6,10 +6,12 @@ import java.io.*;
 import javax.swing.*;
 
 public class FileService {
+    private static final String FILES_DIRECTORY = "files/";
+
     public static void saveToFile(ProductGroup productGroup) {
-        try (FileWriter fileWriter = new FileWriter(productGroup.getGroupName() + ".txt")) {
-            fileWriter.write("Models.Product Group Name: " + productGroup.getGroupName() + "\n");
-            fileWriter.write("Models.Product Group Description: " + productGroup.getGroupDescription() + "\n\n");
+        try (FileWriter fileWriter = new FileWriter(FILES_DIRECTORY + productGroup.getGroupName() + ".txt")) {
+            fileWriter.write("Product Group Name: " + productGroup.getGroupName() + "\n");
+            fileWriter.write("Product Group Description: " + productGroup.getGroupDescription() + "\n\n");
 
             writeProductGroupToFile(productGroup, fileWriter);
 
@@ -22,7 +24,7 @@ public class FileService {
 
     public static void saveToFile(ProductManagementSystem system) {
         try {
-            FileWriter groupWriter = new FileWriter("product_groups.txt");
+            FileWriter groupWriter = new FileWriter(FILES_DIRECTORY + "product_groups.txt");
             for (ProductGroup productGroup : system.getProductGroups()) {
                 groupWriter.write(productGroup.getGroupName() + "\n");
 
@@ -41,7 +43,7 @@ public class FileService {
 
     private static void writeProductGroupToFile(ProductGroup productGroup, FileWriter fileWriter) throws IOException {
         for (Product product : productGroup.getProducts()) {
-            fileWriter.write("Models.Product Name: " + product.getProductName() + "\n");
+            fileWriter.write("Product Name: " + product.getProductName() + "\n");
             fileWriter.write("Description: " + product.getDescription() + "\n");
             fileWriter.write("Manufacturer: " + product.getManufacturer() + "\n");
             fileWriter.write("Quantity in Stock: " + product.getQuantity() + "\n");
