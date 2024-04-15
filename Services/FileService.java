@@ -8,29 +8,13 @@ import javax.swing.*;
 public class FileService {
     private static final String FILES_DIRECTORY = "files/";
 
-    public static void saveToFile(ProductGroup productGroup) {
-        try (FileWriter fileWriter = new FileWriter(FILES_DIRECTORY + productGroup.getGroupName() + ".txt")) {
-            fileWriter.write("Product Group Name: " + productGroup.getGroupName() + "\n");
-            fileWriter.write("Product Group Description: " + productGroup.getGroupDescription() + "\n\n");
-
-            writeProductGroupToFile(productGroup, fileWriter);
-
-            JOptionPane.showMessageDialog(null, "Data saved to file " + productGroup.getGroupName() + ".txt");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error saving data to file.");
-            ex.printStackTrace();
-        }
-    }
-
     public static void saveToFile(ProductManagementSystem system) {
         try {
             FileWriter groupWriter = new FileWriter(FILES_DIRECTORY + "product_groups.txt");
             for (ProductGroup productGroup : system.getProductGroups()) {
                 groupWriter.write(productGroup.getGroupName() + "\n");
 
-                FileWriter productWriter = new FileWriter(productGroup.getGroupName() + ".txt");
-                writeProductGroupToFile(productGroup, productWriter);
-                productWriter.close();
+                writeProductGroupToFile(productGroup);
             }
             groupWriter.close();
 
@@ -41,13 +25,16 @@ public class FileService {
         }
     }
 
-    private static void writeProductGroupToFile(ProductGroup productGroup, FileWriter fileWriter) throws IOException {
+    private static void writeProductGroupToFile(ProductGroup productGroup) throws IOException {
+        FileWriter productWriter = new FileWriter(FILES_DIRECTORY + productGroup.getGroupName() + ".txt");
         for (Product product : productGroup.getProducts()) {
-            fileWriter.write("Product Name: " + product.getProductName() + "\n");
-            fileWriter.write("Description: " + product.getDescription() + "\n");
-            fileWriter.write("Manufacturer: " + product.getManufacturer() + "\n");
-            fileWriter.write("Quantity in Stock: " + product.getQuantity() + "\n");
-            fileWriter.write("Price per Unit: " + product.getPrice() + "\n\n");
+            productWriter.write("Product Name: " + product.getProductName() + "\n");
+            productWriter.write("Description: " + product.getDescription() + "\n");
+            productWriter.write("Manufacturer: " + product.getManufacturer() + "\n");
+            productWriter.write("Quantity in stock: " + product.getQuantity() + "\n");
+            productWriter.write("Price per unit: " + product.getPrice() + "\n\n");
         }
+
+        productWriter.close();
     }
 }
