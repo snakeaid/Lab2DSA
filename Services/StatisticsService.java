@@ -5,7 +5,9 @@ import Models.*;
 import javax.swing.*;
 
 public class StatisticsService {
-    public static void displayStatistics(ProductManagementSystem system) {
+    public static void displayStatistics(ProductManagementSystemFrame systemFrame) {
+        ProductManagementSystem system = systemFrame.getSystem();
+
         StringBuilder statistics = new StringBuilder();
 
         for (ProductGroup group : system.getProductGroups()) {
@@ -21,7 +23,7 @@ public class StatisticsService {
 
         statistics.append("Total Inventory Value: ").append(calculateTotalInventoryValue(system)).append("\n");
 
-        JOptionPane.showMessageDialog(null, statistics.toString());
+        JOptionPane.showMessageDialog(systemFrame, statistics.toString());
     }
 
     private static double calculateTotalGroupValue(ProductGroup group) {

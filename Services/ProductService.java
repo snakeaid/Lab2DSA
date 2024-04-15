@@ -5,102 +5,79 @@ import Models.*;
 import javax.swing.*;
 
 public class ProductService {
-    public static void showProductOptions(ProductManagementSystem system) {
-        String[] options = {"Add Product", "Edit Product", "Remove Product"};
-        int choice = JOptionPane.showOptionDialog(null, "Select an option:", "Product Options",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+    public static void addProduct(ProductManagementSystemFrame systemFrame, ProductGroup productGroup) {
+        String productName = JOptionPane.showInputDialog("Enter the product name:");
+        String description = JOptionPane.showInputDialog("Enter the product description:");
+        String manufacturer = JOptionPane.showInputDialog("Enter the product manufacturer:");
 
-        switch (choice) {
-            case 0:
-                addProduct(system);
+        int quantity = 0;
+        while (true) {
+            try {
+                quantity = Integer.parseInt(JOptionPane.showInputDialog("Enter the quantity:"));
                 break;
-            case 1:
-                editProduct(system);
-                break;
-            case 2:
-                removeProduct(system);
-                break;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(systemFrame, "Invalid quantity. Please enter a valid integer.");
+            }
         }
+
+        double price = 0;
+        while (true) {
+            try {
+                price = Double.parseDouble(JOptionPane.showInputDialog("Enter the price:"));
+                break;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(systemFrame, "Invalid price. Please enter a valid number.");
+            }
+        }
+
+        productGroup.addNewProduct(productName, description, manufacturer, quantity, price);
+        JOptionPane.showMessageDialog(null, "Product added successfully.");
+
+        systemFrame.render();
     }
 
-    private static void addProduct(ProductManagementSystem system) {
-        String groupName = JOptionPane.showInputDialog("Enter the group name:");
-        ProductGroup productGroup = findProductGroup(system, groupName);
+    public static void editProduct(ProductManagementSystemFrame systemFrame, Product product) {
+        String newProductName = JOptionPane.showInputDialog("Enter the new product name:", product.getProductName());
+        String newDescription = JOptionPane.showInputDialog("Enter the new product description:", product.getDescription());
+        String newManufacturer = JOptionPane.showInputDialog("Enter the new manufacturer:", product.getManufacturer());
 
-        if (productGroup != null) {
-            String productName = JOptionPane.showInputDialog("Enter the product name:");
-            String description = JOptionPane.showInputDialog("Enter the product description:");
-            String manufacturer = JOptionPane.showInputDialog("Enter the manufacturer:");
-
-            int quantity = 0;
-            while (true) {
-                try {
-                    quantity = Integer.parseInt(JOptionPane.showInputDialog("Enter the quantity:"));
-                    break;
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, "Invalid quantity. Please enter a valid integer.");
-                }
+        int newQuantity = 0;
+        while (true) {
+            try {
+                newQuantity = Integer.parseInt(JOptionPane.showInputDialog("Enter the new quantity:"));
+                break;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(systemFrame, "Invalid quantity. Please enter a valid integer.");
             }
-
-            double price = 0;
-            while (true) {
-                try {
-                    price = Double.parseDouble(JOptionPane.showInputDialog("Enter the price:"));
-                    break;
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, "Invalid price. Please enter a valid number.");
-                }
-            }
-
-            productGroup.addNewProduct(productName, description, manufacturer, quantity, price);
-            JOptionPane.showMessageDialog(null, "Product added successfully.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Product group not found.");
         }
+
+        double newPrice = 0;
+        while (true) {
+            try {
+                newPrice = Double.parseDouble(JOptionPane.showInputDialog("Enter the new price:"));
+                break;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(systemFrame, "Invalid price. Please enter a valid number.");
+            }
+        }
+
+        product.setProductName(newProductName);
+        product.setDescription(newDescription);
+        product.setManufacturer(newManufacturer);
+        product.setQuantity(newQuantity);
+        product.setPrice(newPrice);
+
+        JOptionPane.showMessageDialog(systemFrame, "Product information updated successfully.");
+
+        systemFrame.render();
     }
 
-    private static void editProduct(ProductManagementSystem system) {
-        String groupName = JOptionPane.showInputDialog("Enter the group name:");
-        ProductGroup productGroup = findProductGroup(system, groupName);
+    public static void removeProduct(ProductManagementSystemFrame systemFrame, ProductGroup productGroup, Product product) {
+        productGroup.removeProduct(product);
 
-        if (productGroup != null) {
-            String productName = JOptionPane.showInputDialog("Enter the product name:");
-            Product product = findProduct(productGroup, productName);
+        JOptionPane.showMessageDialog(systemFrame, "Product removed successfully.");
 
-            if (product != null) {
-                String newProductName = JOptionPane.showInputDialog("Enter the new product name:", product.getProductName());
-                String newDescription = JOptionPane.showInputDialog("Enter the new product description:", product.getDescription());
-                String newManufacturer = JOptionPane.showInputDialog("Enter the new manufacturer:", product.getManufacturer());
-                int newQuantity = Integer.parseInt(JOptionPane.showInputDialog("Enter the new quantity:", product.getQuantity()));
-                double newPrice = Double.parseDouble(JOptionPane.showInputDialog("Enter the new price:", product.getPrice()));
-
-                productGroup.editProductInformation(product, newProductName, newDescription, newManufacturer, newQuantity, newPrice);
-                JOptionPane.showMessageDialog(null, "Product information updated successfully.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Product not found.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Product group not found.");
-        }
-    }
-
-    private static void removeProduct(ProductManagementSystem system) {
-        String groupName = JOptionPane.showInputDialog("Enter the group name:");
-        ProductGroup productGroup = findProductGroup(system, groupName);
-
-        if (productGroup != null) {
-            String productName = JOptionPane.showInputDialog("Enter the product name:");
-            Product product = findProduct(productGroup, productName);
-
-            if (product != null) {
-                productGroup.removeProduct(product);
-                JOptionPane.showMessageDialog(null, "Product removed successfully.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Product not found.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Product group not found.");
-        }
+        systemFrame.render();
     }
 
     public static void searchProduct(ProductManagementSystem system) {

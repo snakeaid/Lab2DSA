@@ -27,4 +27,13 @@ public class ProductManagementSystem {
         productGroups.remove(productGroup);
         productGroup.getProducts().clear();
     }
+
+    public ProductGroup findProductGroup(ProductManagementSystem system, String groupName) {
+        for (ProductGroup group : system.getProductGroups()) {
+            if (group.getGroupName().equalsIgnoreCase(groupName)) {
+                return group;
+            }
+        }
+        return null;
+    }
 }

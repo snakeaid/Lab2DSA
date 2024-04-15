@@ -1,11 +1,21 @@
 package Models;
 
+import Services.ProductGroupService;
+import Services.ProductService;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ProductGroupTitleRowPanel extends JPanel {
-    public ProductGroupTitleRowPanel() {
+    private ProductManagementSystemFrame systemFrame;
+    private ProductGroup productGroup;
+
+    public ProductGroupTitleRowPanel(ProductManagementSystemFrame systemFrame, ProductGroup productGroup) {
         super(new GridLayout(1, 8));
+
+        this.systemFrame = systemFrame;
+        this.productGroup = productGroup;
+
         addColumns();
     }
 
@@ -55,17 +65,20 @@ public class ProductGroupTitleRowPanel extends JPanel {
     }
 
     private void addEditButton() {
-        JButton button = new JButton("Edit category"); //TODO edit
+        JButton button = new JButton("Edit group");
+        button.addActionListener(e -> ProductGroupService.editProductGroup(systemFrame, productGroup));
         add(button);
     }
 
     private void addDeleteButton() {
-        JButton button = new JButton("Delete category"); //TODO delete
+        JButton button = new JButton("Delete group");
+        button.addActionListener(e -> ProductGroupService.removeProductGroup(systemFrame, productGroup));
         add(button);
     }
 
     private void addAddProductButton() {
-        JButton button = new JButton("Add product"); //TODO add product
+        JButton button = new JButton("Add product");
+        button.addActionListener(e -> ProductService.addProduct(systemFrame, productGroup));
         add(button);
     }
 }

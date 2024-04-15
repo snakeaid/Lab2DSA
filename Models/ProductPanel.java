@@ -1,14 +1,22 @@
 package Models;
 
+import Services.ProductService;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ProductPanel extends JPanel {
     private final Product product;
+    private final ProductGroup productGroup;
+    private final ProductManagementSystemFrame systemFrame;
 
-    public ProductPanel(Product product) {
+    public ProductPanel(ProductManagementSystemFrame systemFrame, ProductGroup productGroup, Product product) {
         super(new GridLayout(1, 8));
+
         this.product = product;
+        this.productGroup = productGroup;
+        this.systemFrame = systemFrame;
+
         addColumns();
     }
 
@@ -44,12 +52,14 @@ public class ProductPanel extends JPanel {
     }
 
     private void addEditButton() {
-        JButton button = new JButton("Edit"); //TODO edit
+        JButton button = new JButton("Edit");
+        button.addActionListener(e -> ProductService.editProduct(systemFrame, product));
         add(button);
     }
 
     private void addDeleteButton() {
-        JButton button = new JButton("Delete"); //TODO delete
+        JButton button = new JButton("Delete");
+        button.addActionListener(e -> ProductService.removeProduct(systemFrame, productGroup, product));
         add(button);
     }
 }
