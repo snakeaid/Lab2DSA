@@ -15,17 +15,16 @@ public class ProductManagementSystem {
         return productGroups;
     }
 
+    public List<Product> getProducts() {
+        return productGroups.stream().flatMap(group -> group.getProducts().stream()).toList();
+    }
+
     public void addProductGroup(ProductGroup productGroup) {
         productGroups.add(productGroup);
     }
 
     public void removeProductGroup(ProductGroup productGroup) {
         productGroups.remove(productGroup);
-    }
-
-    public void removeAllProductsInGroup(ProductGroup productGroup) {
-        productGroups.remove(productGroup);
-        productGroup.getProducts().clear();
     }
 
     public ProductGroup findProductGroup(ProductManagementSystem system, String groupName) {

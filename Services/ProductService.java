@@ -3,20 +3,43 @@ package Services;
 import Models.*;
 
 import javax.swing.*;
+import java.util.List;
 
 public class ProductService {
     public static void addProduct(ProductManagementSystemFrame systemFrame, ProductGroup productGroup) {
-        String productName = JOptionPane.showInputDialog("Enter the product name:");
+        ProductManagementSystem system = systemFrame.getSystem();
+
+        String productName;
+        while (true) {
+            productName = JOptionPane.showInputDialog("Enter the product name:");
+            List<String> productNames = system.getProducts().stream().map(Product::getProductName).toList();
+            if (productNames.contains(productName)) {
+                JOptionPane.showMessageDialog(systemFrame, "Product name already exists. Please enter a different name.");
+            } else {
+                break;
+            }
+        }
+        if(productName == null)
+            return;
+
         String description = JOptionPane.showInputDialog("Enter the product description:");
+        if(description == null)
+            return;
+
         String manufacturer = JOptionPane.showInputDialog("Enter the product manufacturer:");
+        if(manufacturer == null)
+            return;
 
         int quantity = 0;
         while (true) {
             try {
                 quantity = Integer.parseInt(JOptionPane.showInputDialog("Enter the quantity:"));
+                if(quantity < 0)
+                    throw new NumberFormatException();
+
                 break;
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(systemFrame, "Invalid quantity. Please enter a valid integer.");
+                JOptionPane.showMessageDialog(systemFrame, "Invalid quantity. Please enter a non-negative valid integer.");
             }
         }
 
@@ -24,9 +47,12 @@ public class ProductService {
         while (true) {
             try {
                 price = Double.parseDouble(JOptionPane.showInputDialog("Enter the price:"));
+                if(price < 0)
+                    throw new NumberFormatException();
+
                 break;
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(systemFrame, "Invalid price. Please enter a valid number.");
+                JOptionPane.showMessageDialog(systemFrame, "Invalid price. Please enter a non-negative valid number.");
             }
         }
 
@@ -37,17 +63,39 @@ public class ProductService {
     }
 
     public static void editProduct(ProductManagementSystemFrame systemFrame, Product product) {
-        String newProductName = JOptionPane.showInputDialog("Enter the new product name:", product.getProductName());
+        ProductManagementSystem system = systemFrame.getSystem();
+
+        String newProductName;
+        while (true) {
+            newProductName = JOptionPane.showInputDialog("Enter the new product name:", product.getProductName());
+            List<String> productNames = system.getProducts().stream().map(Product::getProductName).toList();
+            if (productNames.contains(newProductName)) {
+                JOptionPane.showMessageDialog(systemFrame, "Product name already exists. Please enter a different name.");
+            } else {
+                break;
+            }
+        }
+        if(newProductName == null)
+            return;
+
         String newDescription = JOptionPane.showInputDialog("Enter the new product description:", product.getDescription());
+        if(newDescription == null)
+            return;
+
         String newManufacturer = JOptionPane.showInputDialog("Enter the new manufacturer:", product.getManufacturer());
+        if(newManufacturer == null)
+            return;
 
         int newQuantity = 0;
         while (true) {
             try {
                 newQuantity = Integer.parseInt(JOptionPane.showInputDialog("Enter the new quantity:"));
+                if(newQuantity < 0)
+                    throw new NumberFormatException();
+
                 break;
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(systemFrame, "Invalid quantity. Please enter a valid integer.");
+                JOptionPane.showMessageDialog(systemFrame, "Invalid quantity. Please enter a valid non-negative integer.");
             }
         }
 
@@ -55,9 +103,12 @@ public class ProductService {
         while (true) {
             try {
                 newPrice = Double.parseDouble(JOptionPane.showInputDialog("Enter the new price:"));
+                if(newPrice < 0)
+                    throw new NumberFormatException();
+
                 break;
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(systemFrame, "Invalid price. Please enter a valid number.");
+                JOptionPane.showMessageDialog(systemFrame, "Invalid price. Please enter a valid non-negative number.");
             }
         }
 
