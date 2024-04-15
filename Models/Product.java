@@ -1,9 +1,11 @@
-class Product {
+package Models;
+
+public class Product {
     private String productName;
     private String description;
     private String manufacturer;
-    private int quantity; // Кількість на складі
-    private double price; // Ціна за одиницю
+    private int quantity;
+    private double price;
 
     public Product(String productName, String description, String manufacturer, int quantity, double price) {
         this.productName = productName;
@@ -12,6 +14,8 @@ class Product {
         this.quantity = quantity;
         this.price = price;
     }
+
+    // TODO add editing fields
 
     public String getProductName() {
         return productName;

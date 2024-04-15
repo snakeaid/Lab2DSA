@@ -1,9 +1,11 @@
+package Models;
+
 import java.util.*;
 
-class ProductGroup {
+public class ProductGroup {
     private String groupName;
     private String groupDescription;
-    private List<Product> products;
+    private final List<Product> products;
 
     public ProductGroup(String groupName, String groupDescription) {
         this.groupName = groupName;

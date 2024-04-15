@@ -1,13 +1,17 @@
+package Services;
+
+import Models.*;
+
 import javax.swing.*;
 
-class StatisticsUtils {
+public class StatisticsService {
     public static void displayStatistics(ProductManagementSystem system) {
         StringBuilder statistics = new StringBuilder();
 
         for (ProductGroup group : system.getProductGroups()) {
             statistics.append("Group: ").append(group.getGroupName()).append("\n");
             for (Product product : group.getProducts()) {
-                statistics.append("- Product: ").append(product.getProductName()).append("\n");
+                statistics.append("- Models.Product: ").append(product.getProductName()).append("\n");
                 statistics.append("  Quantity: ").append(product.getQuantity()).append("\n");
                 statistics.append("  Price: ").append(product.getPrice()).append("\n");
                 statistics.append("  Total Value: ").append(product.getQuantity() * product.getPrice()).append("\n");

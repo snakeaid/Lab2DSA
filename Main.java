@@ -1,3 +1,7 @@
+import Models.*;
+import Services.FileService;
+import Services.ProductManagementGUI;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -16,7 +20,7 @@ public class Main {
         system.addProductGroup(foodGroup);
         system.addProductGroup(nonFoodGroup);
 
-        JFrame frame = new JFrame("Product Management System");
+        JFrame frame = new JFrame("Models.Product Management System");
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
         ProductManagementGUI gui = new ProductManagementGUI(system, frame);
@@ -39,8 +43,8 @@ public class Main {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FileUtils.saveToFile(foodGroup);
-                FileUtils.saveToFile(nonFoodGroup);
+                FileService.saveToFile(foodGroup);
+                FileService.saveToFile(nonFoodGroup);
             }
         });
 

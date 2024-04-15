@@ -1,11 +1,15 @@
+package Services;
+
+import Models.*;
+
 import java.io.*;
 import javax.swing.*;
 
-class FileUtils {
+public class FileService {
     public static void saveToFile(ProductGroup productGroup) {
         try (FileWriter fileWriter = new FileWriter(productGroup.getGroupName() + ".txt")) {
-            fileWriter.write("Product Group Name: " + productGroup.getGroupName() + "\n");
-            fileWriter.write("Product Group Description: " + productGroup.getGroupDescription() + "\n\n");
+            fileWriter.write("Models.Product Group Name: " + productGroup.getGroupName() + "\n");
+            fileWriter.write("Models.Product Group Description: " + productGroup.getGroupDescription() + "\n\n");
 
             writeProductGroupToFile(productGroup, fileWriter);
 
@@ -37,7 +41,7 @@ class FileUtils {
 
     private static void writeProductGroupToFile(ProductGroup productGroup, FileWriter fileWriter) throws IOException {
         for (Product product : productGroup.getProducts()) {
-            fileWriter.write("Product Name: " + product.getProductName() + "\n");
+            fileWriter.write("Models.Product Name: " + product.getProductName() + "\n");
             fileWriter.write("Description: " + product.getDescription() + "\n");
             fileWriter.write("Manufacturer: " + product.getManufacturer() + "\n");
             fileWriter.write("Quantity in Stock: " + product.getQuantity() + "\n");

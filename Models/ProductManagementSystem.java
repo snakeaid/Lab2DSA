@@ -1,6 +1,10 @@
+package Models;
+
+import Models.*;
+
 import java.util.*;
 
-class ProductManagementSystem {
+public class ProductManagementSystem {
     private List<ProductGroup> productGroups;
 
     public ProductManagementSystem() {

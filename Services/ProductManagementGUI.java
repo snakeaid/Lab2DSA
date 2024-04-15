@@ -1,9 +1,13 @@
+package Services;
+
+import Models.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
-class ProductManagementGUI {
+public class ProductManagementGUI {
     private ProductManagementSystem system;
     private JFrame frame;
     private JPanel backgroundPanel;
@@ -29,34 +33,34 @@ class ProductManagementGUI {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FileUtils.saveToFile(system);
+                FileService.saveToFile(system);
             }
         });
         frame.add(saveButton);
 
-        JButton productButton = new JButton("Product");
+        JButton productButton = new JButton("Models.Product");
         productButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProductUtils.showProductOptions(system);
+                ProductService.showProductOptions(system);
             }
         });
         frame.add(productButton);
 
-        JButton productGroupButton = new JButton("Product Group");
+        JButton productGroupButton = new JButton("Models.Product Group");
         productGroupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProductGroupUtils.showProductGroupOptions(system);
+                ProductGroupService.showProductGroupOptions(system);
             }
         });
         frame.add(productGroupButton);
 
-        JButton searchButton = new JButton("Search Product");
+        JButton searchButton = new JButton("Search Models.Product");
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProductUtils.searchProduct(system);
+                ProductService.searchProduct(system);
             }
         });
         frame.add(searchButton);
@@ -65,7 +69,7 @@ class ProductManagementGUI {
         statisticsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StatisticsUtils.displayStatistics(system);
+                StatisticsService.displayStatistics(system);
             }
         });
         frame.add(statisticsButton);
