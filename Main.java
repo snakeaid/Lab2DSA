@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,8 +39,8 @@ public class Main {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                saveDataToFile(foodGroup);
-                saveDataToFile(nonFoodGroup);
+                FileUtils.saveToFile(foodGroup);
+                FileUtils.saveToFile(nonFoodGroup);
             }
         });
 
@@ -61,25 +60,5 @@ public class Main {
         frame.setSize(400, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-    }
-
-    private static void saveDataToFile(ProductGroup productGroup) {
-        try (FileWriter fileWriter = new FileWriter(productGroup.getGroupName() + ".txt")) {
-            fileWriter.write("Product Group Name: " + productGroup.getGroupName() + "\n");
-            fileWriter.write("Product Group Description: " + productGroup.getGroupDescription() + "\n\n");
-
-            for (Product product : productGroup.getProducts()) {
-                fileWriter.write("Product Name: " + product.getProductName() + "\n");
-                fileWriter.write("Description: " + product.getDescription() + "\n");
-                fileWriter.write("Manufacturer: " + product.getManufacturer() + "\n");
-                fileWriter.write("Quantity in Stock: " + product.getQuantity() + "\n");
-                fileWriter.write("Price per Unit: " + product.getPrice() + "\n\n");
-            }
-
-            JOptionPane.showMessageDialog(null, "Data saved to file " + productGroup.getGroupName() + ".txt");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error saving data to file.");
-            ex.printStackTrace();
-        }
     }
 }

@@ -29,7 +29,7 @@ class ProductManagementGUI {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FileUtils.saveDataToFile(system);
+                FileUtils.saveToFile(system);
             }
         });
         frame.add(saveButton);
